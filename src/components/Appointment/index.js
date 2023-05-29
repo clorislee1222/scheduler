@@ -7,6 +7,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -94,6 +95,12 @@ export default function Appointment(props) {
           onSave={save}
           onCancel={back}
         />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save the appointment." onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not cancel the appointment." onClose={back} />
       )}
     </article>
   )
