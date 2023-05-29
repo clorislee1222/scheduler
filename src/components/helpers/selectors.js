@@ -11,4 +11,9 @@ function getAppointmentsForDay(state, day) {
   }
 }
 
-export { getAppointmentsForDay };
+function getInterview(state, interview) {
+  if (!interview) return null;
+  return { ...interview, interviewer: state.interviewers[interview.interviewer] }
+}
+
+export { getAppointmentsForDay, getInterview };
