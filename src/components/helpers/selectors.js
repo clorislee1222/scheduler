@@ -16,4 +16,17 @@ function getInterview(state, interview) {
   return { ...interview, interviewer: state.interviewers[interview.interviewer] }
 }
 
-export { getAppointmentsForDay, getInterview };
+function getInterviewersForDay(state, day) {
+  let targetDay = state.days.find((d) => { return d.name === day });
+
+  if (!targetDay) {
+    return [];
+  } else {
+    let targetInterviewers = targetDay.interviewers.map(
+      (id) => state.interviewers[id]
+    )
+    return targetInterviewers;
+  };
+}
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay };
