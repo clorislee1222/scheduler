@@ -26,9 +26,16 @@ const useApplicationData = () => {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
+        const days = state.days.map((a) => {
+          if (a.appointments.includes(id)) {
+            return { ...a, spots: (a.spots - 1) }
+          }
+          return a;
+        });
         setState({
           ...state,
-          appointments
+          appointments,
+          days
         })
       })
   }
@@ -47,9 +54,16 @@ const useApplicationData = () => {
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
+        const days = state.days.map((a) => {
+          if (a.appointments.includes(id)) {
+            return { ...a, spots: (a.spots + 1) }
+          }
+          return a;
+        });
         setState({
           ...state,
-          appointments
+          appointments,
+          days
         })
       })
   }
@@ -69,12 +83,7 @@ const useApplicationData = () => {
     });
   }, []);
 
-  return {
-    state,
-    setDay,
-    bookInterview,
-    cancelInterview
-  }
+  return { state, setDay, bookInterview, cancelInterview };
 }
 
 export default useApplicationData;
