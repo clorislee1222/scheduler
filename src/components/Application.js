@@ -47,9 +47,6 @@ export default function Application(props) {
             onChange={setDay}
           />
         </nav>
-        <form method="POST" action="">
-          <button type="submit" class="button button--primary">Save</button>
-        </form>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
